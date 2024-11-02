@@ -5,6 +5,7 @@
 
 body {
 	font-family: "Poppins", sans-serif;
+    margin-inline: 50px;
 }
 
 @layer base {
