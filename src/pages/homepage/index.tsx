@@ -1,10 +1,11 @@
+import { Logo } from "@/components/logo";
 import { Button } from "@/components/ui/button";
 
 export const Home = () => {
 	return (
 		<div>
-			<p>Home</p>
-			<Button>Click me</Button>
+			<Logo />
+			<Button className="bg-lime-500 hover:bg-lime-700">Welcome</Button>
 		</div>
 	);
 };
