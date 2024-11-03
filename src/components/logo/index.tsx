@@ -1,8 +1,12 @@
 import Ecobazar from "../../../public/img/Ecobazar.svg";
 
-export function Logo() {
+interface LogoProps {
+    className?: string
+}
+
+export function Logo({ className }: LogoProps) {
 	return (
-		<div>
+		<div className={className}>
 			<img src={Ecobazar} alt="logo" />
 		</div>
 	);
