@@ -1,7 +1,6 @@
 import {
 	createBrowserRouter,
 	createRoutesFromElements,
-	Outlet,
 	Route,
 	RouterProvider,
 } from "react-router-dom";
@@ -11,6 +10,7 @@ import Shop from "./pages/shop";
 import "./App.css";
 import { Suspense, useState, useEffect } from "react";
 import { Loader } from "./components/loader";
+import MainLayout from "./layouts/MainLayout";
 
 const InitialLoader = ({ children }: any) => {
 	const [isLoading, setIsLoading] = useState(true);
@@ -29,14 +29,7 @@ const InitialLoader = ({ children }: any) => {
 
 const router = createBrowserRouter(
 	createRoutesFromElements(
-		<Route
-			path={routes.index}
-			element={
-				<>
-					<Outlet />
-				</>
-			}
-		>
+		<Route path={routes.index} element={<MainLayout />}>
 			<Route
 				index
 				path={routes.index}
