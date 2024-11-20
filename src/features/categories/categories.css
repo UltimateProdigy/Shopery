@@ -1,0 +1,13 @@
+@keyframes moveHorizontal {
+	0%,
+	100% {
+		transform: translateX(0);
+	}
+	50% {
+		transform: translateX(15px);
+	}
+}
+
+.arrow {
+	animation: moveHorizontal 3s ease-in-out infinite;
+}
