@@ -7,9 +7,10 @@ import {
 	NavigationMenuLink,
 } from "@/components/ui/navigation-menu";
 import { useNavigate } from "react-router-dom";
+import { PhoneIcon } from "../icons";
 
 export default function Navlinks() {
-    const navigate = useNavigate();
+	const navigate = useNavigate();
 	const links = [
 		{
 			id: 1,
@@ -87,7 +88,10 @@ export default function Navlinks() {
 					</NavigationMenu>
 				))}
 			</div>
-			<p className="text-gray-400 text-[13px] mt-2">{`(219) 555-0114`}</p>
+			<div className="flex gap-3">
+				<PhoneIcon className="mt-1" />
+				<p className="text-white text-[13px] mt-2">{`(219) 555-0114`}</p>
+			</div>
 		</div>
 	);
 }

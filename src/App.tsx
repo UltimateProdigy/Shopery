@@ -7,7 +7,7 @@ import {
 import { routes } from "./constants";
 import { Home } from "./pages/homepage";
 import Shop from "./pages/shop";
-import "./App.css";
+import "./index.css"
 import { Suspense, useState, useEffect } from "react";
 import { Loader } from "./components/loader";
 import MainLayout from "./layouts/MainLayout";
