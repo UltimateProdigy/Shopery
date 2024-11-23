@@ -64,12 +64,13 @@ export default function Navlinks() {
 								<NavigationMenuTrigger className="text-gray-400 hover:text-white hover:bg-[#333333] bg-[#333333] text-[13px] active:bg-[#333333]">
 									{link.name}
 								</NavigationMenuTrigger>
-								<NavigationMenuContent>
-									<div className="grid w-[200px] p-4">
+								<NavigationMenuContent className="bg-[#333333] text-white">
+									<div className="grid w-[200px] p-2">
 										{link.subLinks.map((subLink) => (
 											<NavigationMenuLink
 												asChild
 												key={subLink.name}
+                                                className="px-4 cursor-pointer"
 											>
 												<p
 													onClick={() =>

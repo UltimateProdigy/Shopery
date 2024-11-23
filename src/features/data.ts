@@ -25,6 +25,66 @@ export const services = [
 	},
 ];
 
+export const testimonials = [
+	{
+		name: "John Doe",
+		position: "Customer",
+		quote: "An incredible experience that exceeded all my expectations.",
+		rating: 5,
+	},
+	{
+		name: "Jane Smith",
+		position: "Customer",
+		quote: "Professional, efficient, and absolutely top-notch service.",
+		rating: 5,
+	},
+	{
+		name: "Mike Johnson",
+		position: "Customer",
+		quote: "Transformed our approach with their innovative solutions.",
+		rating: 4,
+	},
+	{
+		name: "Sarah Lee",
+		position: "Customer",
+		quote: "Highly recommend their expertise and dedication.",
+		rating: 5,
+	},
+	{
+		name: "David Chen",
+		position: "Customer",
+		quote: "A game-changer in our industry landscape.",
+		rating: 5,
+	},
+];
+
+export const members = [
+	{
+		id: 1,
+		name: "Jenny Wilson",
+		position: "CEO $ FOUNDER",
+		image: "/src/assets/member/jenny.png",
+	},
+	{
+		id: 2,
+		name: "Jane Cooper",
+		position: "Worker",
+		image: "/src/assets/member/jane.png",
+	},
+	{
+		id: 3,
+		name: "Cody Fisher",
+		position: "Security Guard",
+		image: "/src/assets/member/cody.png",
+	},
+	{
+		id: 4,
+		name: "Robert Fox",
+		position: "Senior Former Manager",
+		image: "/src/assets/member/fox.png",
+	},
+];
+
 export const categories = [
 	{
 		id: 1,

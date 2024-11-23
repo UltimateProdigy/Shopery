@@ -57,10 +57,10 @@ export default function Products() {
 								onClick={() =>
 									handleShoppingBagClick(product.id)
 								}
-								className={`p-2 rounded-full cursor-pointer transition-colors duration-300 ${
+								className={`p-2 rounded-full cursor-pointer transition-colors duration-300 hover:bg-[#00B207] hover:text-white ${
 									activeProductIds.includes(product.id)
 										? "bg-[#00B207] text-white"
-										: "bg-gray-200 text-black"
+										: "bg-gray-300 text-black"
 								}`}
 							>
 								<ShoppingBagIcon size={15} />

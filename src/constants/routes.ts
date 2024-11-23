@@ -1,9 +1,15 @@
 export const routes = {
 	index: "/",
-	homepage: {
-		index: "/homepage",
+	home: {
+		index: "/home",
 	},
 	shop: {
 		index: "/shop",
+	},
+	login: {
+		index: "/login",
+	},
+	register: {
+		index: "/register",
 	},
 };
