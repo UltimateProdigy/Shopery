@@ -2,8 +2,11 @@ import { Logo } from "../logo";
 import Cart from "../cart";
 import SearchBox from "../searchbox";
 import Navlinks from "./navlinks";
+import { routes } from "@/constants";
+import { useNavigate } from "react-router-dom";
 
 export default function Navbar() {
+	const navigate = useNavigate();
 	return (
 		<div className="px-4">
 			<div className="flex justify-between">
@@ -25,7 +28,10 @@ export default function Navbar() {
 						USD
 					</p>
 					<p className="text-gray-400 text-[12px] mt-2 mr-2">|</p>
-					<p className="text-gray-400 text-[12px] mt-2 cursor-pointer">
+					<p
+						className="text-gray-400 text-[12px] mt-2 cursor-pointer"
+						onClick={() => navigate(routes.login.index)}
+					>
 						SIGN IN/ SIGN UP
 					</p>
 				</div>

@@ -10,7 +10,7 @@ export default function SearchBox() {
 					className="absolute left-2 top-1/2 -translate-y-1/2 text-black"
 					size={20}
 				/>
-				<Input type="email" placeholder="Search" className="pl-8" />
+				<Input type="text" placeholder="Search" className="pl-8" />
 			</div>
 			<Button type="submit" className="bg-[#00B207]">
 				Search

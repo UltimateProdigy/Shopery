@@ -19,7 +19,7 @@ export default function Categories() {
 							alt="category"
 							className="mb-2"
 						/>
-						;
+
 						<p className="text-center font-bold mt-6">
 							{category.name}
 						</p>
