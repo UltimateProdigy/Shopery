@@ -13,13 +13,49 @@ import { Mail, Lock, User, AlertCircle, Github } from "lucide-react";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { routes } from "@/constants";
 import { useNavigate } from "react-router-dom";
+import { FormEvent, useState } from "react";
+import { authService } from "@/lib/appwrite.config";
+import { validateEmail, validatePassword } from "@/constants/function";
 
 const RegisterForm = () => {
 	const navigate = useNavigate();
-	// This will be replaced with Appwrite auth later
-	const handleSubmit = (e: { preventDefault: () => void }) => {
+	const [name, setName] = useState("");
+	const [password, setPassword] = useState("");
+	const [email, setEmail] = useState("");
+
+	const [errors, setErrors] = useState({
+		email: "",
+		password: "",
+		name: "",
+		general: "",
+	});
+	const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-		// Appwrite account creation logic will go here
+		setErrors({ email: "", password: "", general: "", name: "" });
+
+		const emailError = validateEmail(email);
+		const passwordError = validatePassword(password);
+
+		if (emailError || passwordError) {
+			setErrors({
+				email: emailError,
+				password: passwordError,
+				general: "",
+				name: "",
+			});
+			return;
+		}
+		try {
+			await authService.createAccount(email, password, name);
+			navigate("/");
+		} catch (error: any) {
+			setErrors((prev) => ({
+				...prev,
+				general:
+					error.message ||
+					"Account Creation Failed. Please try again.",
+			}));
+		}
 	};
 
 	return (
@@ -34,47 +70,72 @@ const RegisterForm = () => {
 					</CardDescription>
 				</CardHeader>
 				<CardContent>
+					{errors.general && (
+						<div className="bg-red-100 text-red-700 p-3 rounded mb-4">
+							{errors.general}
+						</div>
+					)}
 					<form onSubmit={handleSubmit} className="space-y-4">
 						<div className="space-y-2">
 							<Label htmlFor="name">Full Name</Label>
 							<div className="relative">
-								<User className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
+								<User className="absolute left-3 top-2 h-5 w-5 text-gray-400" />
 								<Input
 									id="name"
 									type="text"
 									placeholder="John Doe"
 									className="pl-10"
 									required
+									onChange={(e) => setName(e.target.value)}
 								/>
 							</div>
+							{errors.name && (
+								<div className="bg-red-100 text-red-700 p-3 rounded mb-4">
+									{errors.name}
+								</div>
+							)}
 						</div>
 
 						<div className="space-y-2">
 							<Label htmlFor="email">Email</Label>
 							<div className="relative">
-								<Mail className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
+								<Mail className="absolute left-3 top-2 h-5 w-5 text-gray-400" />
 								<Input
 									id="email"
 									type="email"
 									placeholder="name@example.com"
 									className="pl-10"
 									required
+									onChange={(e) => setEmail(e.target.value)}
 								/>
 							</div>
+							{errors.email && (
+								<div className="bg-red-100 text-red-700 p-3 rounded mb-4">
+									{errors.email}
+								</div>
+							)}
 						</div>
 
 						<div className="space-y-2">
 							<Label htmlFor="password">Password</Label>
 							<div className="relative">
-								<Lock className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
+								<Lock className="absolute left-3 top-2 h-5 w-5 text-gray-400" />
 								<Input
 									id="password"
 									type="password"
 									placeholder="Create a password"
 									className="pl-10"
 									required
+									onChange={(e) =>
+										setPassword(e.target.value)
+									}
 								/>
 							</div>
+							{errors.password && (
+								<div className="bg-red-100 text-red-700 p-3 rounded mb-4">
+									{errors.password}
+								</div>
+							)}
 						</div>
 
 						<div className="space-y-2">
@@ -82,7 +143,7 @@ const RegisterForm = () => {
 								Confirm Password
 							</Label>
 							<div className="relative">
-								<Lock className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
+								<Lock className="absolute left-3 top-2 h-5 w-5 text-gray-400" />
 								<Input
 									id="confirmPassword"
 									type="password"
@@ -123,7 +184,10 @@ const RegisterForm = () => {
 							</Label>
 						</div>
 
-						<Button type="submit" className="w-full bg-[#00B207] text-white">
+						<Button
+							type="submit"
+							className="w-full bg-[#00B207] text-white"
+						>
 							Create Account
 						</Button>
 					</form>

@@ -7,7 +7,7 @@ import {
 import { routes } from "./constants";
 import { Home } from "./pages/home";
 import Shop from "./pages/shop";
-import "./index.css"
+import "./index.css";
 import { Suspense, useState, useEffect } from "react";
 import { Loader } from "./components/loader";
 import MainLayout from "./layouts/MainLayout";
@@ -35,19 +35,35 @@ const router = createBrowserRouter(
 			<Route
 				index
 				path={routes.index}
-				element={<Suspense fallback={<Loader />}>{<Home />}</Suspense>}
+				element={
+					<Suspense fallback={<Loader />}>
+						<Home />
+					</Suspense>
+				}
 			/>
 			<Route
 				path={routes.shop.index}
-				element={<Suspense fallback={<Loader />}>{<Shop />}</Suspense>}
+				element={
+					<Suspense fallback={<Loader />}>
+						<Shop />
+					</Suspense>
+				}
 			/>
-            <Route
+			<Route
 				path={routes.login.index}
-				element={<Suspense fallback={<Loader />}>{<Login />}</Suspense>}
+				element={
+					<Suspense fallback={<Loader />}>
+						<Login />
+					</Suspense>
+				}
 			/>
-            <Route
+			<Route
 				path={routes.register.index}
-				element={<Suspense fallback={<Loader />}>{<Register />}</Suspense>}
+				element={
+					<Suspense fallback={<Loader />}>
+						<Register />
+					</Suspense>
+				}
 			/>
 		</Route>
 	)
