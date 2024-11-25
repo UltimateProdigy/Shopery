@@ -1,12 +1,12 @@
-import Ecobazar from "../../../public/img/Ecobazar.svg";
+import Ecobazar from "../../assets/Ecobazar.svg";
 
 interface LogoProps {
-    className?: string
+	className?: string;
 }
 
 export function Logo({ className }: LogoProps) {
 	return (
-		<div className={className}>
+		<div className={`cursor-pointer ${className}`}>
 			<img src={Ecobazar} alt="logo" />
 		</div>
 	);

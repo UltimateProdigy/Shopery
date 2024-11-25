@@ -15,6 +15,7 @@
     "@radix-ui/react-label": "^2.1.0",
     "@radix-ui/react-navigation-menu": "^1.2.1",
     "@radix-ui/react-slot": "^1.1.0",
+    "appwrite": "^16.0.2",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "embla-carousel-react": "^8.4.0",
@@ -26,7 +27,8 @@
     "react-router-dom": "^6.27.0",
     "react-spinners": "^0.14.1",
     "tailwind-merge": "^2.5.4",
-    "tailwindcss-animate": "^1.0.7"
+    "tailwindcss-animate": "^1.0.7",
+    "yup": "^1.4.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.13.0",

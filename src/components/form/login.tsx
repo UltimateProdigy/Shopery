@@ -12,13 +12,43 @@ import {
 import { Mail, Lock, Github } from "lucide-react";
 import { routes } from "@/constants";
 import { useNavigate } from "react-router-dom";
+import { validateEmail, validatePassword } from "@/constants/function";
+import { FormEvent, useState } from "react";
+import { authService } from "@/lib/appwrite.config";
 
 const LoginForm = () => {
-    const navigate = useNavigate();
-	// This will be replaced with Appwrite auth later
-	const handleSubmit = (e: { preventDefault: () => void }) => {
+	const navigate = useNavigate();
+	const [email, setEmail] = useState("");
+	const [password, setPassword] = useState("");
+
+	const [errors, setErrors] = useState({
+		email: "",
+		password: "",
+		general: "",
+	});
+	const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-		// Appwrite auth logic will go here
+		setErrors({ email: "", password: "", general: "" });
+		const emailError = validateEmail(email);
+		const passwordError = validatePassword(password);
+
+		if (emailError || passwordError) {
+			setErrors({
+				email: emailError,
+				password: passwordError,
+				general: "",
+			});
+			return;
+		}
+		try {
+			await authService.login(email, password);
+			navigate("/");
+		} catch (error: any) {
+			setErrors((prev) => ({
+				...prev,
+				general: error.message || "Login failed. Please try again.",
+			}));
+		}
 	};
 
 	return (
@@ -33,32 +63,51 @@ const LoginForm = () => {
 					</CardDescription>
 				</CardHeader>
 				<CardContent>
+					{errors.general && (
+						<div className="bg-red-100 text-red-700 p-3 rounded mb-4">
+							{errors.general}
+						</div>
+					)}
 					<form onSubmit={handleSubmit} className="space-y-4">
 						<div className="space-y-2">
 							<Label htmlFor="email">Email</Label>
 							<div className="relative">
-								<Mail className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
+								<Mail className="absolute left-3 top-2 h-5 w-5 text-gray-400" />
 								<Input
 									id="email"
 									type="email"
 									placeholder="name@example.com"
 									className="pl-10"
 									required
+									onChange={(e) => setEmail(e.target.value)}
 								/>
 							</div>
+							{errors.email && (
+								<p className="text-red-500 text-sm mt-1">
+									{errors.email}
+								</p>
+							)}
 						</div>
 						<div className="space-y-2">
 							<Label htmlFor="password">Password</Label>
 							<div className="relative">
-								<Lock className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
+								<Lock className="absolute left-3 top-2 h-5 w-5 text-gray-400" />
 								<Input
 									id="password"
 									type="password"
 									placeholder="Enter your password"
 									className="pl-10"
 									required
+									onChange={(e) =>
+										setPassword(e.target.value)
+									}
 								/>
 							</div>
+							{errors.password && (
+								<p className="text-red-500 text-sm mt-1">
+									{errors.password}
+								</p>
+							)}
 						</div>
 						<div className="flex items-center justify-between">
 							<div className="flex items-center">
@@ -76,7 +125,10 @@ const LoginForm = () => {
 								Forgot password?
 							</Button>
 						</div>
-						<Button type="submit" className="w-full bg-[#00B207] text-white">
+						<Button
+							type="submit"
+							className="w-full bg-[#00B207] text-white"
+						>
 							Sign in
 						</Button>
 					</form>
@@ -104,7 +156,11 @@ const LoginForm = () => {
 					</div>
 					<p className="text-center text-sm text-gray-600">
 						Don't have an account?{" "}
-						<Button variant="link" className="p-0" onClick={() => navigate(routes.register.index)}>
+						<Button
+							variant="link"
+							className="p-0"
+							onClick={() => navigate(routes.register.index)}
+						>
 							Sign up
 						</Button>
 					</p>
