@@ -13,6 +13,8 @@ import { Loader } from "./components/loader";
 import MainLayout from "./layouts/MainLayout";
 import Login from "./pages/login";
 import Register from "./pages/register";
+import Products from "./pages/products";
+import ProductDetails from "./pages/products/[id]";
 
 const InitialLoader = ({ children }: any) => {
 	const [isLoading, setIsLoading] = useState(true);
@@ -62,6 +64,22 @@ const router = createBrowserRouter(
 				element={
 					<Suspense fallback={<Loader />}>
 						<Register />
+					</Suspense>
+				}
+			/>
+			<Route
+				path={routes.products.index}
+				element={
+					<Suspense fallback={<Loader />}>
+						<Products />
+					</Suspense>
+				}
+			/>
+			<Route
+				path={routes.products.details}
+				element={
+					<Suspense fallback={<Loader />}>
+						<ProductDetails />
 					</Suspense>
 				}
 			/>

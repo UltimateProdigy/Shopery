@@ -4,9 +4,32 @@ import SearchBox from "../searchbox";
 import Navlinks from "./navlinks";
 import { routes } from "@/constants";
 import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { getInitials } from "@/constants/function";
+import { authService } from "@/lib/appwrite.config";
 
 export default function Navbar() {
 	const navigate = useNavigate();
+	const [user, setUser] = useState<any>(null);
+
+	useEffect(() => {
+		async function checkUser() {
+			const currentUser = await authService.getCurrentUser();
+			setUser(currentUser);
+		}
+		checkUser();
+	}, []);
+
+	const handleLogout = async () => {
+		try {
+			await authService.logout();
+			setUser(null);
+			navigate(routes.index);
+		} catch (error) {
+			console.error("Logout failed", error);
+		}
+	};
+
 	return (
 		<div className="px-4">
 			<div className="flex justify-between">
@@ -20,7 +43,7 @@ export default function Navbar() {
 						Store Location: Lincoln- 344, Illinois, Chicago, USA
 					</p>
 				</div>
-				<div className="flex gap-1">
+				<div className="flex gap-1 items-center">
 					<p className="text-gray-400 text-[12px] mt-2 mr-4 cursor-pointer">
 						ENG
 					</p>
@@ -28,12 +51,27 @@ export default function Navbar() {
 						USD
 					</p>
 					<p className="text-gray-400 text-[12px] mt-2 mr-2">|</p>
-					<p
-						className="text-gray-400 text-[12px] mt-2 cursor-pointer"
-						onClick={() => navigate(routes.login.index)}
-					>
-						SIGN IN/ SIGN UP
-					</p>
+
+					{user ? (
+						<div className="flex items-center gap-2">
+							<div className="w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center text-white font-bold">
+								{getInitials(user.name)}
+							</div>
+							<button
+								onClick={handleLogout}
+								className="text-gray-400 text-[12px] px-2 py-1 border rounded hover:bg-gray-100"
+							>
+								SIGN OUT
+							</button>
+						</div>
+					) : (
+						<p
+							className="text-gray-400 text-[12px] mt-2 cursor-pointer"
+							onClick={() => navigate(routes.login.index)}
+						>
+							SIGN IN/ SIGN UP
+						</p>
+					)}
 				</div>
 			</div>
 			<hr className="mt-2 mb-2" />

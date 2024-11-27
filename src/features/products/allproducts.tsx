@@ -1,27 +1,24 @@
-import { categories } from "../data";
-import { categoryColors } from "../color";
-import { LazyLoadImage } from "react-lazy-load-image-component";
 import { ShoppingBagIcon } from "lucide-react";
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { routes } from "@/constants";
-import { Bounce, toast } from "react-toastify";
-import { useDispatch } from "react-redux";
+import { categories } from "../data";
+import { useState } from "react";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import { categoryColors } from "../color";
 import { addToCart, removeFromCart } from "@/store/slice/cartSlice";
+import { useDispatch } from "react-redux";
+import { Bounce, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-export default function Products() {
-	const navigate = useNavigate();
+import { useNavigate } from "react-router-dom";
+
+export default function AllProducts() {
 	const dispatch = useDispatch();
-	const [randomProducts, setRandomProducts] = useState<any>([]);
+	const navigate = useNavigate();
+	const [activeProductIds, setActiveProductIds] = useState<number[]>([]);
 	const allProducts = categories.flatMap((category) =>
 		(category.products || []).map((product) => ({
 			...product,
 			categoryName: category.name,
 		}))
 	);
-
-	const [activeProductIds, setActiveProductIds] = useState<number[]>([]);
-
 	const handleShoppingBagClick = (productId: number) => {
 		setActiveProductIds((prev: number[]) =>
 			prev.includes(productId)
@@ -34,7 +31,7 @@ export default function Products() {
 		if (productToCart) {
 			if (activeProductIds.includes(productId)) {
 				dispatch(removeFromCart(productToCart));
-				toast.warn("Removed removed cart", {
+				toast.warn("Removed from cart", {
 					position: "top-center",
 					theme: "dark",
 					transition: Bounce,
@@ -49,27 +46,12 @@ export default function Products() {
 			}
 		}
 	};
-	useEffect(() => {
-		const selectedProducts = allProducts
-			.sort(() => 0.5 - Math.random())
-			.slice(0, 12);
-		setRandomProducts(selectedProducts);
-	}, []);
 
 	return (
-		<div className="mt-[60px]">
-			<div className="flex justify-between">
-				<p className="font-bold text-2xl">Popular Products</p>
-				<p
-					className="text-green-500 cursor-pointer arrow"
-					onClick={() => navigate(routes.products.index)}
-				>
-					View All →
-				</p>
-			</div>
-
-			<div className="grid grid-cols-6 mt-6">
-				{randomProducts.map((product: any) => (
+		<>
+			<p className="ml-4 font-bold mt-8 text-3xl">All Products</p>
+			<div className="grid grid-cols-6 mt-6 px-4">
+				{allProducts.map((product) => (
 					<div
 						key={product.id}
 						className="flex flex-col justify-center items-center border h-[250px] border-black/10 p-4 hover:shadow-md hover:border-green-400 hover:text-green-400 transition-shadow duration-300 cursor-pointer relative"
@@ -91,7 +73,7 @@ export default function Products() {
 								<p className=" font-bold text-xs">
 									{`$ ${product.price.toFixed(2)}`}
 								</p>
-								<p className="text-sm text-yellow-400">
+								<p className="text-xs text-yellow-400">
 									{"★".repeat(5)}
 								</p>
 							</div>
@@ -121,6 +103,6 @@ export default function Products() {
 					</div>
 				))}
 			</div>
-		</div>
+		</>
 	);
 }

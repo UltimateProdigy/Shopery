@@ -47,7 +47,7 @@ const RegisterForm = () => {
 		}
 		try {
 			await authService.createAccount(email, password, name);
-			navigate("/");
+			navigate(routes.index);
 		} catch (error: any) {
 			setErrors((prev) => ({
 				...prev,
