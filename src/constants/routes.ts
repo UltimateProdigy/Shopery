@@ -12,4 +12,8 @@ export const routes = {
 	register: {
 		index: "/register",
 	},
+	products: {
+		index: "/products",
+		details: "/products/:id",
+	},
 };

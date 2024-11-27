@@ -42,7 +42,7 @@ const LoginForm = () => {
 		}
 		try {
 			await authService.login(email, password);
-			navigate("/");
+			navigate(routes.index);
 		} catch (error: any) {
 			setErrors((prev) => ({
 				...prev,

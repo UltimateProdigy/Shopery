@@ -1,18 +1,12 @@
-import { Client, Account, ID } from "appwrite";
-
-export const config = {
-	endpoint: "https://cloud.appwrite.io/vi",
-	projectId: "67445056003b68181232",
-	databaseId: "66e3106f002dd04edebe",
-	userCollectionId: "66e310b40023fde6dbd8",
-	productCollectionId: "66e310ec000e873b1dd4",
-};
+import { Client, Account, Databases, ID } from "appwrite";
+import { config } from "@/constants/constant";
 
 const client = new Client()
 	.setEndpoint(config.endpoint)
 	.setProject(config.projectId);
 
 export const account = new Account(client);
+export const databases = new Databases(client);
 
 export const authService = {
 	async createAccount(email: string, password: string, name?: string) {
