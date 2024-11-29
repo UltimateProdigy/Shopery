@@ -15,6 +15,7 @@ import Login from "./pages/login";
 import Register from "./pages/register";
 import Products from "./pages/products";
 import ProductDetails from "./pages/products/[id]";
+import Cart from "./pages/cart";
 
 const InitialLoader = ({ children }: any) => {
 	const [isLoading, setIsLoading] = useState(true);
@@ -80,6 +81,14 @@ const router = createBrowserRouter(
 				element={
 					<Suspense fallback={<Loader />}>
 						<ProductDetails />
+					</Suspense>
+				}
+			/>
+			<Route
+				path={routes.cart.index}
+				element={
+					<Suspense fallback={<Loader />}>
+						<Cart />
 					</Suspense>
 				}
 			/>

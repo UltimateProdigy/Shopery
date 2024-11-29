@@ -7,10 +7,22 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getInitials } from "@/constants/function";
 import { authService } from "@/lib/appwrite.config";
+import { useSelector } from "react-redux";
+import { RootState } from "@/store/store";
 
 export default function Navbar() {
 	const navigate = useNavigate();
 	const [user, setUser] = useState<any>(null);
+	const cart = useSelector((state: RootState) => state.cartReducer.cart);
+	const amount = cart.reduce((total, item) => {
+		const itemQuantity = item.quantity ?? 1;
+		return total + item.price * itemQuantity;
+	}, 0);
+
+	const value = cart.reduce((total, item) => {
+		const itemQuantity = item.quantity ?? 1;
+		return total + itemQuantity;
+	}, 0);
 
 	useEffect(() => {
 		async function checkUser() {
@@ -78,7 +90,11 @@ export default function Navbar() {
 			<div className="flex justify-between">
 				<Logo />
 				<SearchBox />
-				<Cart amount={0} value={0} />
+				<Cart
+					onClick={() => navigate(routes.cart.index)}
+					amount={parseFloat(amount.toFixed(2))}
+					value={value}
+				/>
 			</div>
 			<div className="mt-3">
 				<Navlinks />
