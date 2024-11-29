@@ -16,4 +16,7 @@ export const routes = {
 		index: "/products",
 		details: "/products/:id",
 	},
+	cart: {
+		index: "/cart",
+	},
 };

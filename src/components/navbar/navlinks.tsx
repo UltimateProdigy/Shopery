@@ -16,36 +16,25 @@ export default function Navlinks() {
 			id: 1,
 			name: "Home",
 			subLinks: [
-				{ name: "Home 1", href: "/home1" },
-				{ name: "Home 2", href: "/home2" },
+				{ name: "Homepage", href: "/" },
 			],
 		},
 		{
 			id: 2,
 			name: "Shop",
 			subLinks: [
-				{ name: "Product List", href: "/products" },
-				{ name: "Product Details", href: "/product-details" },
+				{ name: "Cart", href: "/cart" },
+				{ name: "Products", href: "/products" },
+				{ name: "Categories", href: "/categories" },
 			],
 		},
 		{
 			id: 3,
-			name: "Pages",
-			subLinks: [
-				{ name: "About", href: "/about" },
-				{ name: "Services", href: "/services" },
-			],
+			name: "About Us",
+			subLinks: [{ name: "Team", href: "/team" }],
 		},
 		{
 			id: 4,
-			name: "About Us",
-			subLinks: [
-				{ name: "Our Story", href: "/story" },
-				{ name: "Team", href: "/team" },
-			],
-		},
-		{
-			id: 5,
 			name: "Contact Us",
 			subLinks: [
 				{ name: "Contact", href: "/contact" },
@@ -70,7 +59,7 @@ export default function Navlinks() {
 											<NavigationMenuLink
 												asChild
 												key={subLink.name}
-                                                className="px-4 cursor-pointer"
+												className="px-4 cursor-pointer"
 											>
 												<p
 													onClick={() =>

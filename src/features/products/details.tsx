@@ -13,12 +13,11 @@ import { toast, Bounce } from "react-toastify";
 
 export default function ProductDetails() {
 	const { id } = useParams();
+	const cart = useSelector((state: RootState) => state.cartReducer.cart);
 	const dispatch = useDispatch();
 	const [product, setProduct] = useState<ICartProduct | null>(null);
 	const [quantity, setQuantity] = useState(0);
-    const [ categoryName, setCategoryName ] = useState<string>("")
-
-	const cart = useSelector((state: RootState) => state.cartReducer.cart);
+	const [categoryName, setCategoryName] = useState<string>("");
 	const itemInCart = cart.find(
 		(item: ICartProduct) => item.id === Number(id)
 	);
@@ -57,7 +56,7 @@ export default function ProductDetails() {
 		const foundCategory = categories.find((category) =>
 			category.products?.some((p) => p.id === Number(id))
 		);
-        setCategoryName(foundCategory?.name || "")
+		setCategoryName(foundCategory?.name || "");
 		setProduct(foundProduct || null);
 	}, [id]);
 
@@ -115,7 +114,12 @@ export default function ProductDetails() {
 				</div>
 				<hr className="mt-4" />
 				<div className="mt-3">
-					<p className="font-bold">Category: <span className="font-normal text-gray-600">{categoryName}</span></p>
+					<p className="font-bold">
+						Category:{" "}
+						<span className="font-normal text-gray-600">
+							{categoryName}
+						</span>
+					</p>
 				</div>
 			</div>
 		</div>
