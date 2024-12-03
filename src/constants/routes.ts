@@ -19,4 +19,7 @@ export const routes = {
 	cart: {
 		index: "/cart",
 	},
+    checkout: {
+		index: "/checkout",
+	},
 };

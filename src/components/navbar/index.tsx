@@ -66,12 +66,12 @@ export default function Navbar() {
 
 					{user ? (
 						<div className="flex items-center gap-2">
-							<div className="w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center text-white font-bold">
+							<div className="w-7 h-7 rounded-full bg-blue-500 flex items-center justify-center text-white font-bold">
 								{getInitials(user.name)}
 							</div>
 							<button
 								onClick={handleLogout}
-								className="text-gray-400 text-[12px] px-2 py-1 border rounded hover:bg-gray-100"
+								className="text-gray-400 text-[12px] px-1 py-1 border rounded hover:bg-gray-100 bg-[#00B207] text-white"
 							>
 								SIGN OUT
 							</button>
