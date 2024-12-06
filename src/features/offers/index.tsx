@@ -1,19 +1,19 @@
 export default function Offers() {
 	const bannerData = [
 		{
-			image: "/src/assets/banner/banner_1.png",
+			image: "/img/banner/banner_1.png",
 			title: "Sale of the Month",
 			description: "Get amazing discounts",
 			buttonText: "Shop Now →",
 		},
 		{
-			image: "/src/assets/banner/banner_2.png",
+			image: "/img/banner/banner_2.png",
 			title: "Low-Fat Meat",
 			description: "Exclusive deals",
 			buttonText: "Shop Now →",
 		},
 		{
-			image: "/src/assets/banner/banner_3.png",
+			image: "/img/banner/banner_3.png",
 			title: "100% Fresh Fruit",
 			description: "Limited time offer",
 			buttonText: "Shop Now →",

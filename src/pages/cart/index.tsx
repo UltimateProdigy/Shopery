@@ -77,7 +77,7 @@ export default function CartPage() {
 			<div className="flex flex-col justify-center items-center mt-20">
 				<img
 					className="w-[180px]"
-					src="/src/assets/empty.jpg"
+					src="/img/empty.jpg"
 					alt="empty-state"
 				/>
 				<p className="text-2xl font-semibold mt-2">

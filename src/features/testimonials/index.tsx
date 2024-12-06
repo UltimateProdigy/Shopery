@@ -42,7 +42,7 @@ export default function Testimonials() {
 								<Card className="h-[260px]">
 									<CardHeader>
 										<img
-											src="/src/assets/quote.svg"
+											src="/img/quote.svg"
 											alt="quote"
 											className="w-10 mb-4"
 										/>
