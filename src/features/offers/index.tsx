@@ -21,7 +21,7 @@ export default function Offers() {
 	];
 
 	return (
-		<div className="flex justify-between space-x-4 mt-[90px]">
+		<div className="flex justify-between space-x-4 mt-[91px]">
 			{bannerData.map((banner, index) => (
 				<div
 					key={index}
