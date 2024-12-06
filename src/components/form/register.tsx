@@ -16,6 +16,8 @@ import { useNavigate } from "react-router-dom";
 import { FormEvent, useState } from "react";
 import { authService } from "@/lib/appwrite.config";
 import { validateEmail, validatePassword } from "@/constants/function";
+import { Bounce, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const RegisterForm = () => {
 	const navigate = useNavigate();
@@ -47,7 +49,12 @@ const RegisterForm = () => {
 		}
 		try {
 			await authService.createAccount(email, password, name);
-			navigate(routes.index);
+            toast.success("Registeration Successful, Please login", {
+                position: "top-center",
+                theme: "dark",
+                transition: Bounce,
+            });
+			navigate(routes.login.index);
 		} catch (error: any) {
 			setErrors((prev) => ({
 				...prev,
