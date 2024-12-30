@@ -3,12 +3,17 @@
 @tailwind components;
 @tailwind utilities;
 
-
 body {
 	margin-inline: 20px;
 	background-color: #edf2ee;
 	background-image: url("/BG.png");
 	background-size: 150px;
+}
+@media (max-width: 768px) {
+	body {
+		background-size: 100px;
+		margin-inline: 0;
+	}
 }
 body html {
 	font-family: "Poppins", sans-serif;

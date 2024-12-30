@@ -9,7 +9,7 @@ import Footer from "@/features/footer";
 
 export const Home = () => {
 	return (
-		<div className="px-4 mt-4 h-full">
+		<div className=" px-1 md:px-4 my-0 md:my-4 h-full">
 			<div>
 				<HeroSection />
 			</div>
@@ -34,7 +34,7 @@ export const Home = () => {
 			<div>
 				<Footer />
 			</div>
-            <div className="flex justify-center mt-4 mb-2">
+            <div className="flex justify-center mb-2">
                 <p>Ecobazar eCommerce © 2024. All Rights Reserved</p>
             </div>
 		</div>
