@@ -8,6 +8,7 @@ import { useDispatch } from "react-redux";
 import { Bounce, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
+import Back from "@/components/backButton";
 
 export default function AllProducts() {
 	const dispatch = useDispatch();
@@ -49,8 +50,14 @@ export default function AllProducts() {
 
 	return (
 		<>
-			<p className="ml-4 font-bold mt-8 text-3xl">All Products</p>
-			<div className="grid grid-cols-6 mt-6 px-4">
+			<div className="flex sm:flex-row gap-2 sm:gap-1 items-start sm:items-center mt-4 ml-4">
+				<Back />
+				<p className="font-bold text-2xl sm:text-3xl sm:ml-4">
+					All Products
+				</p>
+			</div>
+
+			<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-4 mt-6 px-4">
 				{allProducts.map((product) => (
 					<div
 						key={product.id}
@@ -62,15 +69,17 @@ export default function AllProducts() {
 							className="mt-10 w-30 h-20 object-cover"
 							onClick={() => navigate(`/products/${product.id}`)}
 						/>
-						<div className="flex justify-between items-center w-full mt-auto">
+						<div className="flex justify-between items-center w-full mt-auto gap-2">
 							<div
-								className="flex flex-col"
+								className="flex flex-col flex-1 min-w-0"
 								onClick={() =>
 									navigate(`/products/${product.id}`)
 								}
 							>
-								<p className="text-xs">{product.name}</p>
-								<p className=" font-bold text-xs">
+								<p className="text-xs truncate">
+									{product.name}
+								</p>
+								<p className="font-bold text-xs">
 									{`$ ${product.price.toFixed(2)}`}
 								</p>
 								<p className="text-xs text-yellow-400">
@@ -81,7 +90,7 @@ export default function AllProducts() {
 								onClick={() =>
 									handleShoppingBagClick(product.id)
 								}
-								className={`p-2 rounded-full cursor-pointer transition-colors duration-300 hover:bg-[#00B207] hover:text-white ${
+								className={`p-2 rounded-full cursor-pointer transition-colors duration-300 hover:bg-[#00B207] hover:text-white flex-shrink-0 ${
 									activeProductIds.includes(product.id)
 										? "bg-[#00B207] text-white"
 										: "bg-gray-300 text-black"
@@ -90,7 +99,6 @@ export default function AllProducts() {
 								<ShoppingBagIcon size={15} />
 							</div>
 						</div>
-						{/* Category tag */}
 						<span
 							className={`absolute top-2 right-2 text-xs font-semibold px-2 py-1 rounded ${
 								categoryColors[

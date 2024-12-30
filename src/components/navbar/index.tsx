@@ -44,7 +44,7 @@ export default function Navbar() {
 
 	return (
 		<div className="px-4">
-			<div className="flex justify-between">
+			<div className="md:flex md:justify-between hidden">
 				<div className="flex gap-1">
 					<img
 						className="w-3"
@@ -71,7 +71,7 @@ export default function Navbar() {
 							</div>
 							<button
 								onClick={handleLogout}
-								className="text-gray-400 text-[12px] px-1 py-1 border rounded hover:bg-gray-100 bg-[#00B207] text-white"
+								className="text-gray-400 text-[12px] px-1 py-1 border rounded hover:bg-gray-100 bg-[#00B207]"
 							>
 								SIGN OUT
 							</button>
@@ -89,14 +89,16 @@ export default function Navbar() {
 			<hr className="mt-2 mb-2" />
 			<div className="flex justify-between">
 				<Logo />
-				<SearchBox />
+				<div className="hidden md:block">
+					<SearchBox />
+				</div>
 				<Cart
 					onClick={() => navigate(routes.cart.index)}
 					amount={parseFloat(amount.toFixed(2))}
 					value={value}
 				/>
 			</div>
-			<div className="mt-3">
+			<div className="mt-3 hidden md:block">
 				<Navlinks />
 			</div>
 		</div>

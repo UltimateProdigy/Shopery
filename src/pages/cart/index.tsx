@@ -74,13 +74,13 @@ export default function CartPage() {
 
 	if (cart.length === 0) {
 		return (
-			<div className="flex flex-col justify-center items-center mt-20">
+			<div className="flex flex-col justify-center items-center mt-20 px-4">
 				<img
 					className="w-[180px]"
 					src="/img/empty.jpg"
 					alt="empty-state"
 				/>
-				<p className="text-2xl font-semibold mt-2">
+				<p className="text-2xl font-semibold mt-2 text-center">
 					Your cart is empty!
 				</p>
 				<Button
@@ -94,27 +94,27 @@ export default function CartPage() {
 	}
 
 	return (
-		<div>
+		<div className="container mx-auto px-4">
 			<div className="flex justify-center mt-6">
-				<h1 className="text-3xl font-bold items-center">
+				<h1 className="text-2xl md:text-3xl font-bold items-center text-center">
 					My Shopping Cart
 				</h1>
 			</div>
 
-			<div className="px-[100px] mt-10 flex gap-10">
-				<div className="space-y-6">
+			<div className="mt-10 flex flex-col lg:flex-row gap-6 lg:gap-10">
+				<div className="space-y-6 w-full lg:w-2/3">
 					{cart.map((item) => (
 						<div
 							key={item.id}
-							className="flex items-center justify-between border p-4 rounded-md shadow-sm w-[800px]"
+							className="flex flex-col sm:flex-row items-center justify-between border p-4 rounded-md shadow-sm w-full"
 						>
-							<div className="flex items-center gap-4">
+							<div className="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto">
 								<img
 									src={item.image}
 									alt={item.name}
 									className="w-20 h-20 object-cover rounded"
 								/>
-								<div>
+								<div className="text-center sm:text-left">
 									<p className="text-lg font-semibold">
 										{item.name}
 									</p>
@@ -123,28 +123,27 @@ export default function CartPage() {
 									)}`}</p>
 								</div>
 							</div>
-							<div className="flex items-center gap-4">
-								<div className="flex items-center gap-4">
-									<Counter
-										productId={item.id}
-										initialQuantity={item.quantity}
-										onQuantityChange={() =>
-											handleQuantityChange
-										}
-									/>
-									<Button
-										variant="outline"
-										className="text-red-500"
-										onClick={() => handleRemove(item.id)}
-									>
-										Remove
-									</Button>
-								</div>
+							<div className="flex flex-col sm:flex-row items-center gap-4 mt-4 sm:mt-0">
+								<Counter
+									productId={item.id}
+									initialQuantity={item.quantity}
+									onQuantityChange={() =>
+										handleQuantityChange
+									}
+								/>
+								<Button
+									variant="outline"
+									className="text-red-500"
+									onClick={() => handleRemove(item.id)}
+								>
+									Remove
+								</Button>
 							</div>
 						</div>
 					))}
 				</div>
-				<div className="border p-4 rounded-lg w-[300px] h-[300px]">
+
+				<div className="border p-4 rounded-lg w-full lg:w-1/3 h-fit">
 					<p className="font-bold text-xl">Cart Total</p>
 					<div className="flex justify-between mt-4 mb-2">
 						<p>Subtotal</p>
@@ -161,7 +160,7 @@ export default function CartPage() {
 						<p className="font-bold">{`$${total.toFixed(2)}`}</p>
 					</div>
 
-					<div className="flex flex-col justify-between items-center ">
+					<div className="flex flex-col justify-between items-center">
 						<Button
 							className="w-full rounded-full mt-2"
 							onClick={handleClearCart}
